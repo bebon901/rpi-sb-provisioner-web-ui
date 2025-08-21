@@ -16,6 +16,8 @@ A web-based application that provides a real-time, color-coded overview of USB p
 - **Start/Stop monitoring** controls
 - **Error handling** with connection status indicators
 
+<img width="1919" height="1079" alt="Screenshot 2025-08-21 154636" src="https://github.com/user-attachments/assets/5e198548-9764-4a2b-9930-b8de168c0da3" />
+
 ## Requirements
 
 - Python 3.6 or higher
