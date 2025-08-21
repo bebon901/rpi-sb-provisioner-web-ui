@@ -1,0 +1,564 @@
+/* USB Port Monitor Styles */
+
+:root {
+    --primary-color: #2196F3;
+    --success-color: #4CAF50;
+    --error-color: #F44336;
+    --warning-color: #FF9800;
+    --gray-color: #9E9E9E;
+    --dark-gray: #424242;
+    --light-gray: #f5f5f5;
+    --white: #ffffff;
+    --shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --radius: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-gray);
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.header h1 {
+    color: var(--primary-color);
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.header h1 i {
+    margin-right: 10px;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.status-dot {
+    font-size: 1.2em;
+}
+
+.status-dot.connected {
+    color: var(--success-color);
+}
+
+.status-dot.connecting {
+    color: var(--warning-color);
+}
+
+.status-dot.error {
+    color: var(--error-color);
+}
+
+/* Legend */
+.legend-section {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.legend-section h3 {
+    margin-bottom: 15px;
+    color: var(--dark-gray);
+}
+
+.legend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.color-box {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--white);
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+}
+
+/* Main Content */
+.main-content {
+    margin-bottom: 20px;
+}
+
+.ports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.loading-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.loading-message i {
+    font-size: 2em;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+/* Port Cards */
+.port-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.port-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.port-card.clickable {
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.port-card.clickable:hover {
+    border-color: var(--success-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.port-controls {
+    float: right;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.click-icon {
+    color: var(--success-color);
+    font-size: 1.1em;
+}
+
+.port-disable-btn, .port-enable-btn {
+    background: none;
+    border: none;
+    color: var(--dark-gray);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+}
+
+.port-disable-btn:hover {
+    background: var(--error-color);
+    color: white;
+}
+
+.port-enable-btn:hover {
+    background: var(--success-color);
+    color: white;
+}
+
+.port-card.disabled {
+    opacity: 0.6;
+    border: 2px dashed var(--gray-color);
+}
+
+.disabled-label {
+    font-size: 0.85em;
+    color: var(--gray-color);
+    font-style: italic;
+}
+
+.disabled-status {
+    background: #f5f5f5;
+    color: var(--gray-color);
+}
+
+.timeout-warning {
+    color: var(--warning-color);
+    margin-left: 8px;
+    animation: pulse 2s infinite;
+}
+
+/* Timing Information */
+.timing-info {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(66,66,66,0.2);
+}
+
+.timing-line {
+    font-size: 0.85em;
+    color: var(--dark-gray);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.timing-line i {
+    font-size: 0.8em;
+    opacity: 0.7;
+    color: var(--primary-color);
+}
+
+.timing-line strong {
+    color: #333;
+    font-weight: 600;
+}
+
+/* For disabled ports, adjust timing info color */
+.disabled-status .timing-info {
+    border-top-color: rgba(158,158,158,0.3);
+}
+
+.disabled-status .timing-line {
+    color: var(--gray-color);
+}
+
+.disabled-status .timing-line strong {
+    color: var(--dark-gray);
+}
+
+.port-header {
+    background: var(--dark-gray);
+    color: var(--white);
+    padding: 15px 20px;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.port-status {
+    padding: 0;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.status-content {
+    text-align: center;
+    padding: 20px;
+    color: var(--white);
+    width: 100%;
+}
+
+.status-title {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.status-details {
+    font-size: 0.95em;
+    opacity: 0.95;
+    line-height: 1.4;
+}
+
+.status-details div {
+    margin-bottom: 5px;
+}
+
+.status-details strong {
+    font-weight: 600;
+}
+
+/* Controls */
+.controls-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.controls-left {
+    display: flex;
+    gap: 10px;
+}
+
+.controls-right {
+    color: var(--dark-gray);
+    font-size: 0.9em;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn i {
+    font-size: 0.9em;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background: #1976D2;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: var(--gray-color);
+    color: var(--white);
+}
+
+.btn-secondary:hover {
+    background: #757575;
+    transform: translateY(-1px);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Footer */
+.footer {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 15px 20px;
+    text-align: center;
+    color: var(--dark-gray);
+    font-size: 0.9em;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: var(--white);
+    margin: 15% auto;
+    padding: 0;
+    border-radius: var(--radius);
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+    background: var(--error-color);
+    color: var(--white);
+    padding: 20px;
+    border-radius: var(--radius) var(--radius) 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+}
+
+.close {
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.close:hover {
+    opacity: 1;
+}
+
+.modal-body {
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.modal-footer {
+    padding: 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Animations */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.connecting {
+    animation: pulse 1.5s infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .ports-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .controls-section {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .controls-left {
+        order: 2;
+    }
+    
+    .controls-right {
+        order: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.5em;
+    }
+    
+    .legend-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .port-card {
+        margin: 0 -5px;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Status-specific colors */
+.status-bootstrap { background-color: var(--primary-color); }
+.status-triage { background-color: var(--warning-color); }
+.status-provisioning { background-color: var(--primary-color); }
+.status-complete { background-color: var(--success-color); }
+.status-error { background-color: var(--error-color); }
+.status-no-device { background-color: var(--gray-color); }
+.status-unknown { background-color: #607D8B; }
+
+/* Notifications */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    z-index: 2000;
+    max-width: 350px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.3s ease;
+}
+
+.notification-success {
+    border-left: 4px solid var(--success-color);
+}
+
+.notification-info {
+    border-left: 4px solid var(--primary-color);
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: auto;
+    opacity: 0.7;
+}
+
+.notification-close:hover {
+    opacity: 1;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+} 

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USB Port Monitor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-usb"></i> USB Port Monitor</h1>
+                <div class="status-indicator">
+                    <span id="connection-status" class="status-dot connecting">●</span>
+                    <span id="connection-text">Connecting...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Legend -->
+        <div class="legend-section">
+            <h3><i class="fas fa-info-circle"></i> Status Legend</h3>
+            <div class="legend-grid">
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #2196F3;">■</span>
+                    <span>In Progress (Bootstrap/Triage/Provisioning)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #4CAF50;">■</span>
+                    <span>Finished/Complete</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #F44336;">■</span>
+                    <span>Error/Aborted</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #9C27B0;">■</span>
+                    <span>Waiting for New CM Module</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #81C784;">■</span>
+                    <span>Slow Progress (>5min)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #9E9E9E;">■</span>
+                    <span>No Device</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div id="ports-container" class="ports-grid">
+                <!-- Ports will be dynamically loaded here -->
+                <div class="loading-message">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading USB port data...</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Controls -->
+        <div class="controls-section">
+            <div class="controls-left">
+                <button id="refresh-btn" class="btn btn-primary">
+                    <i class="fas fa-sync-alt"></i> Refresh Now
+                </button>
+                <button id="toggle-monitoring" class="btn btn-secondary">
+                    <i class="fas fa-pause"></i> Stop Monitoring
+                </button>
+            </div>
+            <div class="controls-right">
+                <span id="last-update">Last update: Never</span>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>USB Port Monitor for RPI SB Provisioner | 
+            <span id="device-count">0 ports monitored</span> | 
+            Auto-refresh: <span id="refresh-interval">2s</span></p>
+        </footer>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="error-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Connection Error</h3>
+                <span class="close" onclick="closeErrorModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="error-message">Failed to connect to the provisioner service.</p>
+                <p>Please ensure the RPI SB Provisioner service is running on localhost.</p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeErrorModal()" class="btn btn-primary">OK</button>
+                <button onclick="retryConnection()" class="btn btn-secondary">Retry</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/monitor.js') }}"></script>
+</body>
+</html> 
